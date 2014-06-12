@@ -13,7 +13,7 @@ The sketch file wires up a few things.
 
 ###Fritzing
 
-![Fritzing Diagram](../blob/master/spark_nest.png?raw=true)
+![Fritzing Diagram](https://raw.githubusercontent.com/mdobson/spark_nest/master/spark_nest.png)
 
 ###Dependencies
 

@@ -1,4 +1,7 @@
 // This #include statement was automatically added by the Spark IDE.
+#include "Adafruit_MPL115A.h"
+
+// This #include statement was automatically added by the Spark IDE.
 #include "Adafruit_LEDBackpack.h"
 
 //PIR Sensor
@@ -11,6 +14,10 @@ int val = 0;
 bool remote = false;
 
 Adafruit_8x8matrix matrix1;
+Adafruit_MPL115A2 sensor1;
+
+double temp = 0;
+char* message = "Hello";
 
 static const uint8_t smile[] = {
   0b00111100,
@@ -41,6 +48,8 @@ void setup() {
     pinMode(LEDPin, OUTPUT);
     pinMode(InputPin, INPUT);
     Spark.function("screen", writeToPack);
+    Spark.variable("temp", &temp, DOUBLE);
+    sensor1.begin();
 
 }
 
@@ -68,12 +77,14 @@ void loop() {
     if(!remote) {
         if (val == HIGH) {
             matrix1.clear();
-            matrix1.drawBitmap(0, 0, smile, 8, 8, LED_ON);
+            matrix1.drawBitmap(0, 0, frown, 8, 8, LED_ON);
             matrix1.writeDisplay();
         } else {
             matrix1.clear();
-            matrix1.drawBitmap(0, 0, frown, 8, 8, LED_ON);
+            matrix1.drawBitmap(0, 0, smile, 8, 8, LED_ON);
             matrix1.writeDisplay();
         }
     }
+
+    temp = sensor1.getTemperature();
 }
